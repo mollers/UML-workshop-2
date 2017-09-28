@@ -2,27 +2,31 @@ package boatClub;
 
 public class Boat {
 	private int length;
-	private String type;
+	private type t;
 	
-	public Boat(int i, String t){
-		setSize(i);
-		setType(t);
+	public Boat(int i, type t){
+		this.length = i;
+		this.t = t;
 	}
 	
-	public void setSize(int i){
+	public enum type{
+		Sailboat, Motorsailer, Kayak_Canoe, Other
+	}
+	
+	public void setLength(int i){
 		length = i;
 	}
 	
-	public int getSize(){
+	public int getLength(){
 		return length;
 	}
 	
-	public void setType(String t){
-		type = t;
+	public void setType(type t){
+		this.t = t;
 	}
 	
-	public String getType(){
-		return type;
+	public type getType(){
+		return this.t;
 	}
 	
 	
