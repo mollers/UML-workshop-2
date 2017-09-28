@@ -48,12 +48,17 @@ public class Member {
 		return boats;
 	}
 	
-	public void addBoat(Boat boat) {
+	public void addBoat(int lenght, Boat.boatType boatType) {
+		Boat boat = new Boat(lenght, boatType);
 		this.boats.add(boat);
 	}
 	
 	public void deleteBoats(int index){
 		this.boats.remove(index-1);
+	}
+	public void changeBoat(int index, int lenght, Boat.boatType boatType) {
+		Boat boat = new Boat(lenght, boatType);
+		this.boats.set(index-1, boat);
 	}
 	
 }

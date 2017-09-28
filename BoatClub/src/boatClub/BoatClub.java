@@ -1,7 +1,6 @@
 package boatClub;
 
 import java.util.ArrayList;
-import boatClub.Boat.boatType;
 
 public class BoatClub {
 	private Registry tmp1;
@@ -17,8 +16,8 @@ public class BoatClub {
 	}
 	
 	public void addMemmber(String name, String personalNR) {
-		// get id from rgeistry and uppdate registry and change new highest id
-		int id = 0;
+		// uppdate registry
+		int id = getNewId();
 		Member memb = new Member(name, personalNR, id);
 		members.add(memb);
 	}
@@ -29,6 +28,7 @@ public class BoatClub {
 	
 	
 	public void deleteMember(int id){
+		//uppdate registry
 		int i = findMemberPos(id);
 		members.remove(i);
 	}
@@ -39,15 +39,22 @@ public class BoatClub {
 	}
 	
 	public void registerBoat(int id, int lenght, Boat.boatType boatType){
+		// uppdate registry
 		int i = findMemberPos(id);
 		Member member = members.get(i);
+		member.addBoat(lenght, boatType);
 	}
 	
 	public void deleteBoat(int id, int index){
+		//uppdate registery
+		int i = findMemberPos(id);
+		members.get(i).deleteBoats(index);
 		
 	}
 	public void changeBoaT(int id, int index, int size, Boat.boatType boatType){
-		
+		//uppdate registery
+		int i = findMemberPos(id);
+		members.get(i).changeBoat(index, size, boatType);
 	}
 	
 	private int findMemberPos(int id) {
@@ -62,5 +69,12 @@ public class BoatClub {
 		
 		return 0;
 		
+	}
+	private int getNewId() {
+		int i = members.size();
+		if(0 < i) {
+			return members.get(i-1).getId() + 1;
+		}
+		return 1;
 	}
 }
