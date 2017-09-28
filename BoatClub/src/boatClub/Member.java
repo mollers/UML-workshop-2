@@ -27,7 +27,7 @@ public class Member {
 	public int getNumberOfBoats() {
 		return this.boats.size();
 	}
-	public Boat[] getBoats() {
+	public ArrayList<Boat> getBoats() {
 		return boats;
 	}
 	public void addBoats(Boat boat) {
