@@ -11,9 +11,9 @@ public class RegistryMainTest {
 		boats.add(new Boat(4,Boat.boatType.valueOf("Other")));
 		boats.add(new Boat(1000,Boat.boatType.valueOf("Motorsailer")));
 		
-		long start = System.currentTimeMillis();
 		
-		for(int i = 0; i < 3; i++) {
+		long start = System.currentTimeMillis();
+		for(int i = 0; i < 1000; i++) {
 			
 			reg.addMember(new Member("Emil Mattsson", "920718-1190", i, boats));
 		}
@@ -23,16 +23,17 @@ public class RegistryMainTest {
 		long end = System.currentTimeMillis();
 		
 		System.out.println("TIME:" + (end-start));
-		/*for(int i = 0; i < reqMembers.size(); i++){
+		for(int i = 0; i < reqMembers.size(); i++){
+			System.out.println();
 			System.out.println(reqMembers.get(i).getName());
 			System.out.println(reqMembers.get(i).getPersonalNR());
 			System.out.println(reqMembers.get(i).getId());
-			ArrayList<Boat> boats = reqMembers.get(i).getBoats();
-			for(int j = 0; j < boats.size();j++) {
-				System.out.println(boats.get(j).getType());
-				System.out.println(boats.get(j).getLength());
+			ArrayList<Boat> boats2 = reqMembers.get(i).getBoats();
+			for(int j = 0; j < boats2.size();j++) {
+				System.out.println(boats2.get(j).getType());
+				System.out.println(boats2.get(j).getLength());
 			}
-		}*/
+		}
 	}
 
 }
