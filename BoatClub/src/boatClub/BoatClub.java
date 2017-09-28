@@ -1,7 +1,6 @@
 package boatClub;
 
 import java.util.ArrayList;
-import boatClub.Boat.boatType;
 
 public class BoatClub {
 	private Registry tmp1;
