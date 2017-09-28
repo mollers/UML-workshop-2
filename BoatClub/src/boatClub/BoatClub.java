@@ -18,46 +18,49 @@ public class BoatClub {
 	
 	public void addMemmber(String name, String personalNR) {
 		// get id from rgeistry and uppdate registry and change new highest id
+		int id = 0;
 		Member memb = new Member(name, personalNR, id);
 		members.add(memb);
 	}
 	
-	public void cMemberList(){
-		//get list from registry print name, member id and amount of boats
-		for(int i = 0; i < members.size(); i++ ){
-			Member member = members.get(i);
-			System.out.println("name: "+ member.getName()+
-					" id: "+member.getId()+
-					" amount of boats: "+member.getNumberOfBoats());
-		}
+	public ArrayList<Member> MemberList(){
+		return members;
 	}
 	
-	public void vMemberList(){
-		//get list from 
-		for(int i = 0; i < members.size(); i++ ){
-			System.out.println("Name: "+members.get(i).getName()+
-					" Id: "+members.get(i).getId()+
-					" PersonalNR: "+members.get(i).getPersonalNR()+
-					" Amount of boats: "+members.get(i).getNumberOfBoats());
-		}
-	}
 	
 	public void deleteMember(int id){
-		
+		int i = findMemberPos(id);
+		members.remove(i);
 	}
 	
-	public void viewMember(int id){
-		
+	public Member viewMember(int id){
+		int i = findMemberPos(id);
+		return members.get(i);
 	}
 	
 	public void registerBoat(int id, int lenght, Boat.boatType boatType){
-		
+		int i = findMemberPos(id);
+		Member member = members.get(i);
 	}
 	
 	public void deleteBoat(int id, int index){
 		
 	}
 	public void changeBoaT(int id, int index, int size, Boat.boatType boatType){
+		
+	}
+	
+	private int findMemberPos(int id) {
+		//need fix for not a existing id
+		for(int i = 0; i < members.size(); i++ ) {
+			Member member = members.get(i);
+			if(member.getId() == id) {
+				return i;
+			}
+		}
+		
+		
+		return 0;
 		
 	}
 }
