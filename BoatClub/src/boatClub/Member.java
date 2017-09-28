@@ -6,5 +6,4 @@ public class Member {
 	private int id;
 	private int numberOfBoats;
 	private Boat[] boats;
-
 }
