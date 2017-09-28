@@ -8,18 +8,17 @@ public class BoatClub {
 	
 	private ArrayList<Member> members;
 	private String[] memberInfo;
-	
+	private Registry reg = new Registry();
 	
 	public void init(){
-		Registry reg = new Registry();
 		members = reg.loadRegistry();
 	}
 	
 	public void addMemmber(String name, String personalNR) {
-		// get id from rgeistry and uppdate registry and change new highest id
-		int id = 0;
-		Member memb = new Member(name, personalNR, id);
-		members.add(memb);
+		int id = getNewId();
+		Member member = new Member(name, personalNR, id);
+		members.add(member);
+		reg.addMember(member);
 	}
 	
 	public ArrayList<Member> MemberList(){
@@ -30,6 +29,7 @@ public class BoatClub {
 	public void deleteMember(int id){
 		int i = findMemberPos(id);
 		members.remove(i);
+		uppdateRegistry();
 	}
 	
 	public Member viewMember(int id){
@@ -40,17 +40,23 @@ public class BoatClub {
 	public void registerBoat(int id, int lenght, Boat.boatType boatType){
 		int i = findMemberPos(id);
 		Member member = members.get(i);
+		member.addBoat(lenght, boatType);
+		uppdateRegistry();
 	}
 	
 	public void deleteBoat(int id, int index){
+		int i = findMemberPos(id);
+		members.get(i).deleteBoats(index);
+		uppdateRegistry();
 		
 	}
 	public void changeBoaT(int id, int index, int size, Boat.boatType boatType){
-		
+		int i = findMemberPos(id);
+		members.get(i).changeBoat(index, size, boatType);
+		uppdateRegistry();
 	}
 	
 	private int findMemberPos(int id) {
-		//need fix for not a existing id
 		for(int i = 0; i < members.size(); i++ ) {
 			Member member = members.get(i);
 			if(member.getId() == id) {
@@ -61,5 +67,18 @@ public class BoatClub {
 		
 		return 0;
 		
+	}
+	private int getNewId() {
+		int i = members.size();
+		if(0 < i) {
+			return members.get(i-1).getId() + 1;
+		}
+		return 1;
+	}
+	private void uppdateRegistry() {
+		// delete exissting registry
+		for(int i = 0; i < members.size(); i++) {
+			reg.addMember(members.get(i));
+		}
 	}
 }
