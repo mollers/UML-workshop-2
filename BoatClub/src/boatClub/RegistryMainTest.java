@@ -11,6 +11,8 @@ public class RegistryMainTest {
 		member.addBoat(boat2);
 		Registry register = new Registry();
 		register.addMember(member);
+		register.addMember(member);
+		register.addMember(member);
 	}
 
 }

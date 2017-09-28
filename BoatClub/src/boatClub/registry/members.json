@@ -1,0 +1,48 @@
+[
+{
+	"name": "Emil Bengtsson",
+	"persNR": "941008-6897",
+	"id": 1,
+	"boats": [
+		{ 
+			"type": "Sailboat",
+			"length": 6
+		},
+		{ 
+			"type": "Other",
+			"length": 150
+		}
+	]
+}
+,
+{
+	"name": "Emil Bengtsson",
+	"persNR": "941008-6897",
+	"id": 1,
+	"boats": [
+		{ 
+			"type": "Sailboat",
+			"length": 6
+		},
+		{ 
+			"type": "Other",
+			"length": 150
+		}
+	]
+},
+{
+	"name": "Emil Bengtsson",
+	"persNR": "941008-6897",
+	"id": 1,
+	"boats": [
+		{ 
+			"type": "Sailboat",
+			"length": 6
+		},
+		{ 
+			"type": "Other",
+			"length": 150
+		}
+	]
+}
+]
