@@ -5,8 +5,14 @@ public class Boat {
 	private type t;
 	
 	public Boat(int i, type t){
-		this.length = i;
-		this.t = t;
+		if (i < 1){
+			System.err.println("A boat can't be shorter than 1");
+			this.t = t;
+			
+		} else {
+			this.length = i;
+			this.t = t;
+		}
 	}
 	
 	public enum type{

@@ -4,8 +4,14 @@ import java.util.ArrayList;
 public class Member {
 	private String name;
 	private String personalNR;
-	private int id;
+	private final int id;
 	private ArrayList<Boat> boats = new ArrayList<Boat>();
+	
+	public Member(String n, String p, int i){
+		this.name = n;
+		this.personalNR = p;
+		this.id = i++;
+	}
 	
 	public String getName() {
 		return name;
@@ -25,10 +31,6 @@ public class Member {
 	
 	public int getId() {
 		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public int getNumberOfBoats() {
