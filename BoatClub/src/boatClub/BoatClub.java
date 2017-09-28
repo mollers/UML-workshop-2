@@ -2,11 +2,12 @@ package boatClub;
 
 import java.util.ArrayList;
 import boatClub.Boat.boatType;
+
 public class BoatClub {
-	private Regestry tmp1;
-	private Controller controll;
+	private Registry tmp1;
+	//private Controller controll;
 	
-	private Arraylist<Member> members;
+	private ArrayList<Member> members;
 	private String[] memberInfo;
 	
 	
@@ -24,19 +25,20 @@ public class BoatClub {
 	public void cMemberList(){
 		//get list from registry print name, member id and amount of boats
 		for(int i = 0; i < members.size(); i++ ){
-			System.out.println("name: "+mebmbers[i].getName()+
-					" id: "+members[i].getId()+
-					" amount of boats: "+members[i].getgetNumberOfBoats());
+			Member member = members.get(i);
+			System.out.println("name: "+ member.getName()+
+					" id: "+member.getId()+
+					" amount of boats: "+member.getNumberOfBoats());
 		}
 	}
 	
 	public void vMemberList(){
 		//get list from 
 		for(int i = 0; i < members.size(); i++ ){
-			System.out.println("Name: "+mebmbers[i].getName()+
-					" Id: "+members[i].getId()+
-					" PersonalNR: "+members[i].getPersonalNR()+
-					" Amount of boats: "+members[i].getgetNumberOfBoats());
+			System.out.println("Name: "+members.get(i).getName()+
+					" Id: "+members.get(i).getId()+
+					" PersonalNR: "+members.get(i).getPersonalNR()+
+					" Amount of boats: "+members.get(i).getNumberOfBoats());
 		}
 	}
 	
