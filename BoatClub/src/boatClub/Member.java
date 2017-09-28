@@ -41,7 +41,7 @@ public class Member {
 		return boats;
 	}
 	
-	public void addBoats(Boat boat) {
+	public void addBoat(Boat boat) {
 		this.boats.add(boat);
 	}
 	

@@ -8,7 +8,7 @@ public class Boat {
 		if (i < 1){
 			// Maybe move this error handling to view?
 			System.err.println("A boat can't be shorter than 1");
-			this.type = t;
+			//this.type = t;
 			
 		} else {
 			this.length = i;
