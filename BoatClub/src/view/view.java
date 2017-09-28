@@ -1,10 +1,14 @@
 package view;
 
+import java.util.Scanner;
+
 public class view {
+	
 	public view() { 
 		
 	}
-	public void menu(){
+	
+	public void displayMenu(){
 		System.out.println(
 			"==Boatclub Menu== \n"+
 			"0: Create new member \n"+
@@ -18,5 +22,14 @@ public class view {
 			"8: Change boat info\n"+
 			"type the number in consloe and endter with enter"
 				);
+	}
+	
+	public void getInputChar(){
+		Scanner scan = new Scanner(System.in);
+		int input = scan.nextInt();
+		
+		if (input < 0){
+			System.err.println("Please enter an integer equals or higher than 0.");
+		}
 	}
 }

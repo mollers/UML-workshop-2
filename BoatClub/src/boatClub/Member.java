@@ -13,6 +13,13 @@ public class Member {
 		this.id = i++;
 	}
 	
+	public Member(String n, String p, int i, ArrayList<Boat> b){
+		this.name = n;
+		this.personalNR = p;
+		this.id = i++;
+		this.boats = b;
+	}
+	
 	public String getName() {
 		return name;
 	}
