@@ -2,38 +2,37 @@ package boatClub;
 
 public class Boat {
 	private int length;
-	private type t;
+	private boatType type;
 	
-	public Boat(int i, type t){
+	public Boat(int i, boatType t){
 		if (i < 1){
+			// Maybe move this error handling to view?
 			System.err.println("A boat can't be shorter than 1");
-			this.t = t;
+			this.type = t;
 			
 		} else {
 			this.length = i;
-			this.t = t;
+			this.type = t;
 		}
 	}
 	
-	public enum type{
+	public enum boatType{
 		Sailboat, Motorsailer, Kayak_Canoe, Other
 	}
 	
 	public void setLength(int i){
-		length = i;
+		this.length = i;
 	}
 	
 	public int getLength(){
-		return length;
+		return this.length;
 	}
 	
-	public void setType(type t){
-		this.t = t;
+	public void setType(boatType t){
+		this.type = t;
 	}
 	
-	public type getType(){
-		return this.t;
+	public boatType getType(){
+		return this.type;
 	}
-	
-	
 }
