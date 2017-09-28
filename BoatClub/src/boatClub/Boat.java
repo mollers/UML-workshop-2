@@ -1,22 +1,29 @@
 package boatClub;
 
 public class Boat {
-	private int size;
+	private int length;
 	private String type;
 	
-	public void setSize (int i){
-		size = i;
+	public Boat(int i, String t){
+		setSize(i);
+		setType(t);
 	}
 	
-	public int getSize (){
-		return size;
+	public void setSize(int i){
+		length = i;
 	}
 	
-	public void setType (String t){
+	public int getSize(){
+		return length;
+	}
+	
+	public void setType(String t){
 		type = t;
 	}
 	
-	public String getType (){
+	public String getType(){
 		return type;
 	}
+	
+	
 }
