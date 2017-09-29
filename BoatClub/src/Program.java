@@ -1,5 +1,4 @@
-import boatClub.BoatClub;
-
+import model.BoatClub;
 import view.view;
 
 public class Program {

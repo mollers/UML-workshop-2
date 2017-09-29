@@ -3,15 +3,15 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import boatClub.Boat;
+import model.Boat;
 
 public class view {
 	
 	final Scanner scan = new Scanner(System.in);
 	private int input;
-	private boatClub.BoatClub theJollyPirate;
+	private model.BoatClub theJollyPirate;
 	
-	public view(boatClub.BoatClub b) { 
+	public view(model.BoatClub b) { 
 		theJollyPirate = b;
 	}
 	
@@ -29,6 +29,7 @@ public class view {
 			"8: Change boat info\n"+
 			"type the number in console and enter with enter"
 				);
+		System.out.print("Command: ");
 	}
 	
 	public boolean usingSystem(){
@@ -39,7 +40,7 @@ public class view {
 		try {
 			input = scan.nextInt();
 			
-			while (input < 0){
+			while (input < 0 || input > 8){
 				System.err.println("Please enter a number displayed in the meny.");
 				input = scan.nextInt();
 			}
@@ -94,23 +95,27 @@ public class view {
 	
 	private void addMember(){
 		scan.nextLine();
-		System.out.println("Please enter name of new member.");
+		System.out.println("Enter name of new member and press enter");
+		System.out.print("Name: ");
 		String name = getInput();
 		
 		System.out.println("Please enter personal number of new member in the following format yymmdd-xxxx");
+		System.out.print("PersonalNR: ");
 		String pn = getInput();
 		
 		theJollyPirate.addMemmber(name, pn);
+		System.out.println("Member added!");
+		displayMenu();
 	}
 	
 	private void compactList(){
-		for (boatClub.Member m: theJollyPirate.MemberList()){
+		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println(m.getCompactInfo());
 		}
 	}
 	
 	private void verboseList(){
-		for (boatClub.Member m: theJollyPirate.MemberList()){
+		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println(m.toString());
 		}
 	}
@@ -150,7 +155,7 @@ public class view {
 		printMemberInfo(theJollyPirate.viewMember(1));
 	}
 	
-	private void printMemberInfo(boatClub.Member m){
+	private void printMemberInfo(model.Member m){
 		System.out.println("Name: " + m.getName() + " personalNr: " + m.getPersonalNR() + " ID: " + m.getId());
 		
 		for (int i = 0; i < m.getNumberOfBoats(); i++){
@@ -166,7 +171,7 @@ public class view {
 		int l = scan.nextInt();
 		scan.nextLine();
 		System.out.println("Please enter boat type.");
-		boatClub.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
+		model.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
 		
 		theJollyPirate.registerBoat(i, l, type);
 	}

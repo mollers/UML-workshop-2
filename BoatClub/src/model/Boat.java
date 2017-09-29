@@ -1,4 +1,4 @@
-package boatClub;
+package model;
 
 public class Boat {
 	private int length;

@@ -1,4 +1,4 @@
-package boatClub;
+package model;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,7 +17,7 @@ public class Registry {
 
 	public Registry() {
 		this.memberArr = new ArrayList<Member>();
-		this.file = new File("src/boatClub/registry/members.json");
+		this.file = new File("src/data/members.json");
 	}
 
 	public ArrayList<Member> loadRegistry(){

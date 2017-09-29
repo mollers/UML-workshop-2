@@ -1,4 +1,4 @@
-package boatClub;
+package model;
 
 import java.util.ArrayList;
 public class Member {
@@ -64,7 +64,7 @@ public class Member {
 		StringBuffer sb = new StringBuffer();
 		sb.append("Name: " + this.getName() + " personal number: " + this.getPersonalNR() + " ID: " + this.getId() + "\n");
 		
-		for (boatClub.Boat b: this.boats){
+		for (model.Boat b: this.boats){
 			sb.append(b.toString());
 		}
 		return sb.toString();
