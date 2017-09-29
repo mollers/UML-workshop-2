@@ -3,18 +3,15 @@ package model;
 import java.util.ArrayList;
 
 public class BoatClub {
-	private Registry tmp1;
-	//private Controller controll;
-	
+
 	private ArrayList<Member> members;
-	private String[] memberInfo;
 	private Registry reg = new Registry();
 	
 	public void init(){
 		members = reg.loadRegistry();
 	}
 	// Adding member to the existing registry
-	public void addMemmber(String name, String personalNR) {
+	public void addMember(String name, String personalNR) {
 		int id = getNewId();
 		Member member = new Member(name, personalNR, id);
 		members.add(member);
@@ -23,6 +20,16 @@ public class BoatClub {
 	
 	public ArrayList<Member> MemberList(){
 		return members;
+	}
+	
+	public void changeMemberInfo(int id, String name, String personalNR){
+		int i = findMemberPos(id);
+		members.get(i).setName(name);
+		members.get(i).setPersonalNR(personalNR);
+		reg.changeMember(members);
+	}
+	public void changeMemberInfo(String name){
+		
 	}
 	
 	//delete member with the given id
@@ -53,7 +60,7 @@ public class BoatClub {
 		//uppdateRegistry();
 		
 	}
-	//change info of the exizting boat to new info given
+	//change info of the existing boat to new info given
 	public void changeBoaT(int id, int index, int size, Boat.boatType boatType){
 		int i = findMemberPos(id);
 		members.get(i).changeBoat(index, size, boatType);

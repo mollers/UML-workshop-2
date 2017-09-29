@@ -62,7 +62,7 @@ public class Member {
 	}
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("Name: " + this.getName() + " personal number: " + this.getPersonalNR() + " ID: " + this.getId() + "\n");
+		sb.append("Name: " + this.getName() + " Personal number: " + this.getPersonalNR() + " ID: " + this.getId() + "\n");
 		
 		for (model.Boat b: this.boats){
 			sb.append(b.toString());
