@@ -37,6 +37,6 @@ public class Boat {
 	}
 	
 	public String toString(){
-		return "Type: " + this.type + " Length: " + this.length + "\n";
+		return "Boat: " + this.type + " Length: " + this.length + "\n";
 	}
 }

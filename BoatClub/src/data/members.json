@@ -1,1 +1,1 @@
-[{"name":"aa","persNR":"a","id":1,"boats":[]},{"name":"Asd","persNR":"1545","id":2,"boats":[]},{"name":"h","persNR":"gdf","id":3,"boats":[]},{"name":"Adam","persNR":"951223","id":4,"boats":[]}]
+[{"name":"2","persNR":"3","id":1,"boats":[]},{"name":"Asd","persNR":"1545","id":2,"boats":[]},{"name":"h","persNR":"gdf","id":3,"boats":[]},{"name":"Adam","persNR":"951223","id":4,"boats":[{"length":1,"boatType":"Other"}]},{"name":"fist","persNR":"fistsson","id":5,"boats":[{"length":1,"boatType":"Other"},{"length":10000,"boatType":"Kayak_Canoe"},{"length":1,"boatType":"Sailboat"}]}]

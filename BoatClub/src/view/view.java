@@ -59,13 +59,13 @@ public class view {
 
 	public String getInputChar(){
 		try {
-			input = scan.nextLine();
+			input = scan.next();
 			
 			while(!checkInput(input)) {
 				System.err.println("Please enter a number displayed in the meny or q");
 				Thread.sleep(1);
 				System.out.print("Command: ");
-				input = scan.nextLine();
+				input = scan.next();
 			}
 				
 			
@@ -106,20 +106,21 @@ public class view {
 		System.out.print("PersonalNR: ");
 		String pn = getInput();
 
-		theJollyPirate.addMemmber(name, pn);
+		theJollyPirate.addMember(name, pn);
 		System.out.println("Member added!");
 		displayMenu();
 	}
 
 	private void compactList(){
+		int i = 0;
 		for (model.Member m: theJollyPirate.MemberList()){
-			System.out.println(m.getCompactInfo());
+			System.out.println("Member " + (++i) + ": " + m.getCompactInfo());
 		}
 	}
 
 	private void verboseList(){
 		for (model.Member m: theJollyPirate.MemberList()){
-			System.out.println(m.toString());
+			System.out.println("Member: " + m.toString());
 		}
 	}
 
@@ -131,6 +132,16 @@ public class view {
 	}
 
 	private void changeMemberInfo(){
+		System.out.println("Please enter id of member.");
+		int id = scan.nextInt();
+		
+		System.out.println("Please enter new name of member.");
+		String name = scan.next();
+
+		System.out.println("Please enter new personal number of member.");
+		String pn = scan.next();
+		
+		theJollyPirate.changeMemberInfo(id, name, pn);
 		displayMenu();
 	}
 
@@ -138,9 +149,8 @@ public class view {
 
 		String s = "";
 		try {
-
 			while (scan.hasNextLine()){
-				s = scan.nextLine();
+				s = scan.next();
 				if (s != "") break;
 			}
 
@@ -148,11 +158,6 @@ public class view {
 			e.printStackTrace();
 		}
 		return s;
-	}
-
-	private void getCompactList(){
-		theJollyPirate.MemberList();
-
 	}
 
 	private void viewMember(){
@@ -172,25 +177,21 @@ public class view {
 	}
 
 	private void registerBoat(){
-		
 		System.out.println("Please enter member ID.");
 		int i = scan.nextInt();
 
 		System.out.println("Please enter length of boat.");
 		int l = scan.nextInt();
 
-		
 		System.out.println("Please enter boat type.");
-		model.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
+		model.Boat.boatType type = Boat.boatType.valueOf(scan.next());
 
 		theJollyPirate.registerBoat(i, l, type);
 	}
 
 	private void deleteBoat(){
-		
 		System.out.println("Please enter id of member.");
 		int id = scan.nextInt();
-
 		
 		System.out.println("Please enter index of boat");
 		int i = scan.nextInt();
