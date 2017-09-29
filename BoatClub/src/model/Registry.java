@@ -1,10 +1,11 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.json.*;
@@ -16,24 +17,28 @@ public class Registry {
 
 	public Registry() {
 		this.memberArr = new ArrayList<Member>();
-		this.file = new File(Registry.class.getResource("/data/members.json").getFile());
+		this.file = new File(System.getProperty("user.home"),"members.json"); 
+		if(!file.exists()) {
+			try {
+				file.createNewFile();// Creates a file in at the users computer
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public ArrayList<Member> loadRegistry(){
+		BufferedReader bf;
 		try {
-			
-			InputStream stream = this.getClass().getClassLoader().getResourceAsStream("data/members.json");
-			int nextByte;
-			String JSONString = "";
-			while((nextByte = stream.read()) > -1) // Reads the whole file
-			{
-				JSONString += ((char)nextByte);
+			// read the file if it consists anything. 
+			bf = new BufferedReader(new FileReader(file.getPath()));
+			String line;
+			if((line = bf.readLine()) !=  null) {
+				JSONArr = new JSONArray(line);
 			}
-			
-			//creates json array from string
-			if(JSONString.length() > 0) {
-				JSONArr = new JSONArray(JSONString);
-			}
+			bf.close();
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

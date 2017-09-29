@@ -59,13 +59,13 @@ public class view {
 
 	public String getInputChar(){
 		try {
-			input = scan.next();
+			input = scan.nextLine();
 			
 			while(!checkInput(input)) {
 				System.err.println("Please enter a number displayed in the meny or q");
 				Thread.sleep(1);
 				System.out.print("Command: ");
-				input = scan.next();
+				input = scan.nextLine();
 			}
 				
 			
@@ -96,19 +96,21 @@ public class view {
 		}
 		return input;
 	}
-
+	private void nextCommand() {
+		System.out.print("Next command: ");
+	}
 	private void addMember(){
 		System.out.println("Enter name of new member and press enter");
 		System.out.print("Name: ");
-		String name = getInput();
+		String name = scan.nextLine();
 
 		System.out.println("Please enter personal number of new member in the following format yymmdd-xxxx");
 		System.out.print("PersonalNR: ");
-		String pn = getInput();
+		String pn = scan.nextLine();
 
 		theJollyPirate.addMember(name, pn);
 		System.out.println("Member added!");
-		displayMenu();
+		nextCommand();
 	}
 
 	private void compactList(){
@@ -116,79 +118,70 @@ public class view {
 		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println("Member " + (++i) + ": " + m.getCompactInfo());
 		}
+		nextCommand();
 	}
 
 	private void verboseList(){
 		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println("Member: " + m.toString());
 		}
+		nextCommand();
 	}
 
 	private void deleteMember(){
 		System.out.println("Please enter ID of the member you want to delete.");
 		System.out.print("Id: ");
-		int i = scan.nextInt();
-		theJollyPirate.deleteMember(i);
+		String id = scan.nextLine();
+		theJollyPirate.deleteMember(Integer.valueOf(id));
+		nextCommand();
 	}
 
-	private void changeMemberInfo(){
+	private void changeMemberInfo() throws InterruptedException{
 		System.out.println("Please enter id of member.");
-		int id = scan.nextInt();
+		String id = scan.nextLine();
 		
 		System.out.println("Please enter new name of member.");
-		String name = scan.next();
+		String name = scan.nextLine();
+		Thread.sleep(1);
 
 		System.out.println("Please enter new personal number of member.");
-		String pn = scan.next();
+		String pn = scan.nextLine();
 		
-		theJollyPirate.changeMemberInfo(id, name, pn);
-		displayMenu();
+		theJollyPirate.changeMemberInfo(Integer.valueOf(id), name, pn);
+		nextCommand();
 	}
-
-	private String getInput(){
-
-		String s = "";
-		try {
-			while (scan.hasNextLine()){
-				s = scan.next();
-				if (s != "") break;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return s;
-	}
-
 	private void viewMember(){
 		System.out.println("Please enter ID of member.");
 		System.out.print("Id: ");
-		int id = scan.nextInt();
+		String id = scan.nextLine();
 
-		System.out.println(theJollyPirate.MemberList().get(id-1).toString());
+		System.out.println(theJollyPirate.MemberList().get(Integer.valueOf(id)-1).toString());
+		nextCommand();
 	}
 
 	private void registerBoat(){
 		System.out.println("Please enter member ID.");
-		int i = scan.nextInt();
+		String memberID = scan.nextLine();
 
 		System.out.println("Please enter length of boat.");
-		int l = scan.nextInt();
+		String boatLength = scan.nextLine();
 
 		System.out.println("Please enter boat type.");
-		model.Boat.boatType type = Boat.boatType.valueOf(scan.next());
+		model.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
 
-		theJollyPirate.registerBoat(i, l, type);
+		theJollyPirate.registerBoat(Integer.valueOf(memberID), Integer.valueOf(boatLength), type);
+		nextCommand();
 	}
 
 	private void deleteBoat(){
 		System.out.println("Please enter id of member.");
-		int id = scan.nextInt();
+		String id = scan.nextLine();
 		
 		System.out.println("Please enter index of boat");
-		int i = scan.nextInt();
+		String index = scan.nextLine();
 
-		theJollyPirate.deleteBoat(id, i);
+		theJollyPirate.deleteBoat(Integer.valueOf(id), Integer.valueOf(index));
+		nextCommand();
 	}
 
 	private void changeBoatInfo() throws IOException{
@@ -205,5 +198,6 @@ public class view {
 		model.Boat.boatType t = Boat.boatType.valueOf(scan.nextLine());
 
 		theJollyPirate.changeBoaT(id, index, length, t);
+		nextCommand();
 	}
 }
