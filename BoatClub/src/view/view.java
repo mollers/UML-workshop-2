@@ -56,7 +56,7 @@ public class view {
 					break;
 				case 4:	changeMemberInfo();
 					break;
-				case 5: System.out.println(theJollyPirate.MemberList().get(1).toString());
+				case 5: viewMember();
 					break;
 				case 6:	registerBoat();
 					break;
@@ -152,7 +152,10 @@ public class view {
 	}
 	
 	private void viewMember(){
-		printMemberInfo(theJollyPirate.viewMember(1));
+		System.out.println("Please enter ID of member.");
+		int id = scan.nextInt();
+		
+		System.out.println(theJollyPirate.MemberList().get(id-1).toString());
 	}
 	
 	private void printMemberInfo(model.Member m){
@@ -167,8 +170,10 @@ public class view {
 		scan.nextLine();
 		System.out.println("Please enter member ID.");
 		int i = scan.nextInt();
+		
 		System.out.println("Please enter length of boat.");
 		int l = scan.nextInt();
+		
 		scan.nextLine();
 		System.out.println("Please enter boat type.");
 		model.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
@@ -177,7 +182,15 @@ public class view {
 	}
 	
 	private void deleteBoat(){
+		scan.nextLine();
+		System.out.println("Please enter id of member.");
+		int id = scan.nextInt();
 		
+		scan.nextLine();
+		System.out.println("Please enter index of boat");
+		int i = scan.nextInt();
+		
+		theJollyPirate.deleteBoat(id, i);
 	}
 	
 	private void changeBoatInfo(){
