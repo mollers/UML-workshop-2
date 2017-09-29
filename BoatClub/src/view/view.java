@@ -8,7 +8,7 @@ import model.Boat;
 public class view {
 	
 	final Scanner scan = new Scanner(System.in);
-	private int input;
+	private String input;
 	private model.BoatClub theJollyPirate;
 	
 	public view(model.BoatClub b) { 
@@ -38,63 +38,43 @@ public class view {
 	
 	public int getInputChar(){
 		try {
-			input = scan.nextInt();
+			input = scan.nextLine();
 			
-			while (input < 0 || input > 8){
+			while (Integer.valueOf(input) < 0 || Integer.valueOf(input) > 8){
 				System.err.println("Please enter a number displayed in the meny.");
-				input = scan.nextInt();
+				input = scan.nextLine();
 			}
 			
 			switch (input){
-				case 0: addMember();
+				case "0": addMember();
 					break;
-				case 1: compactList();
+				case "1": compactList();
 					break;
-				case 2:	verboseList();
+				case "2":	verboseList();
 					break;
-				case 3:	deleteMember();
+				case "3":	deleteMember();
 					break;
-				case 4:	changeMemberInfo();
+				case "4":	changeMemberInfo();
 					break;
-				case 5: viewMember();
+				case "5": viewMember();
 					break;
-				case 6:	registerBoat();
+				case "6":	registerBoat();
 					break;
-				case 7:	deleteBoat();
+				case "7":	deleteBoat();
 					break;
-				case 8:	changeBoatInfo();
+				case "8":	changeBoatInfo();
 					break;
-				default: input = 'q';
+				default: input = "q";
 					break;
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*
-		int input = scan.nextInt();
-		
-		if (input < 0){
-			System.err.println("Please enter an integer equals or higher than 0.");
-			
-			while (input < 0){
-				input = scan.nextInt();
-				
-				if (input >= 0) break;
-			}
-		}
-		
-		switch (input){
-			case 0: addMember();
-				break;
-				
-			case 1: 
-		}*/
-		return input;
+		return Integer.valueOf(input);
 	}
 	
 	private void addMember(){
-		scan.nextLine();
 		System.out.println("Enter name of new member and press enter");
 		System.out.print("Name: ");
 		String name = getInput();
@@ -112,22 +92,25 @@ public class view {
 		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println(m.getCompactInfo());
 		}
+		displayMenu();
 	}
 	
 	private void verboseList(){
 		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println(m.toString());
 		}
+		displayMenu();
 	}
 	
 	private void deleteMember(){
 		System.out.println("Please enter ID of the member you want to delete.");
 		int i = scan.nextInt();
 		theJollyPirate.deleteMember(i);
+		displayMenu();
 	}
 	
 	private void changeMemberInfo(){
-		
+		displayMenu();
 	}
 	
 	private String getInput(){
@@ -148,11 +131,12 @@ public class view {
 	
 	private void getCompactList(){
 		theJollyPirate.MemberList();
-		
+		displayMenu();
 	}
 	
 	private void viewMember(){
 		System.out.println("Please enter ID of member.");
+		System.out.print("Id: ");
 		int id = scan.nextInt();
 		
 		System.out.println(theJollyPirate.MemberList().get(id-1).toString());
@@ -179,21 +163,27 @@ public class view {
 		model.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
 		
 		theJollyPirate.registerBoat(i, l, type);
+		displayMenu();
 	}
 	
 	private void deleteBoat(){
 		scan.nextLine();
 		System.out.println("Please enter id of member.");
+		System.out.print("Member Id: ");
 		int id = scan.nextInt();
+		
+		System.out.println(theJollyPirate.MemberList().get(id-1).toString());
 		
 		scan.nextLine();
 		System.out.println("Please enter index of boat");
+		System.out.print("Boat index: ");
 		int i = scan.nextInt();
 		
 		theJollyPirate.deleteBoat(id, i);
+		displayMenu();
 	}
 	
 	private void changeBoatInfo(){
-		
+		displayMenu();
 	}
 }
