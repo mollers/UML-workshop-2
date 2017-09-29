@@ -2,10 +2,12 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.json.*;
@@ -24,7 +26,7 @@ public class Registry {
 		BufferedReader bf;
 		try {
 			// read the file if it consists anything. 
-			bf = new BufferedReader(new FileReader(file.getPath()));
+			bf = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 			String line;
 			if((line = bf.readLine()) !=  null) {
 				JSONArr = new JSONArray(line);
