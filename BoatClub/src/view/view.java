@@ -1,7 +1,6 @@
 package view;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Boat;
