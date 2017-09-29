@@ -60,5 +60,18 @@ public class Member {
 		Boat boat = new Boat(lenght, boatType);
 		this.boats.set(index-1, boat);
 	}
-	
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name: " + this.getName() + " personal number: " + this.getPersonalNR() + " ID: " + this.getId() + "\n");
+		
+		for (boatClub.Boat b: this.boats){
+			sb.append(b.toString());
+		}
+		return sb.toString();
+	}
+	public String getCompactInfo(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name: " + this.getName() + " ID: " + this.getId() + " Boats: " + this.getNumberOfBoats());
+		return sb.toString();
+	}
 }

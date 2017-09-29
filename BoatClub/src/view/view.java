@@ -3,6 +3,8 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import boatClub.Boat;
+
 public class view {
 	
 	final Scanner scan = new Scanner(System.in);
@@ -53,7 +55,7 @@ public class view {
 					break;
 				case 4:	changeMemberInfo();
 					break;
-				case 5: viewMember();
+				case 5: System.out.println(theJollyPirate.MemberList().get(1).toString());
 					break;
 				case 6:	registerBoat();
 					break;
@@ -106,9 +108,8 @@ public class view {
 	}
 	
 	private void verboseList(){
-		ArrayList<boatClub.Member> boatClub = theJollyPirate.MemberList();
 		
-		for (boatClub.Member m: boatClub){
+		for (boatClub.Member m: theJollyPirate.MemberList()){
 			printMemberInfo(m);
 		}
 	}
@@ -157,7 +158,16 @@ public class view {
 	}
 	
 	private void registerBoat(){
+		scan.nextLine();
+		System.out.println("Please enter member ID.");
+		int i = scan.nextInt();
+		System.out.println("Please enter length of boat.");
+		int l = scan.nextInt();
+		scan.nextLine();
+		System.out.println("Please enter boat type.");
+		boatClub.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
 		
+		theJollyPirate.registerBoat(i, l, type);
 	}
 	
 	private void deleteBoat(){
