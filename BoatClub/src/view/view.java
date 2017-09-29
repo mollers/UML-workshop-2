@@ -168,14 +168,6 @@ public class view {
 		System.out.println(theJollyPirate.MemberList().get(id-1).toString());
 	}
 
-	private void printMemberInfo(model.Member m){
-		System.out.println("Name: " + m.getName() + " personalNr: " + m.getPersonalNR() + " ID: " + m.getId());
-
-		for (int i = 0; i < m.getNumberOfBoats(); i++){
-			System.out.println("Boat " + (i + 1) + ": " + m.getBoats().get(i).toString());
-		}
-	}
-
 	private void registerBoat(){
 		System.out.println("Please enter member ID.");
 		int i = scan.nextInt();

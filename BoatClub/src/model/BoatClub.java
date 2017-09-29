@@ -3,11 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class BoatClub {
-	private Registry tmp1;
-	//private Controller controll;
-	
+
 	private ArrayList<Member> members;
-	private String[] memberInfo;
 	private Registry reg = new Registry();
 	
 	public void init(){
