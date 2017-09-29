@@ -55,7 +55,7 @@ public class view {
 					break;
 				case 4:	changeMemberInfo();
 					break;
-				case 5: System.out.println(theJollyPirate.MemberList().get(1).toString());
+				case 5: viewMember();
 					break;
 				case 6:	registerBoat();
 					break;
@@ -147,7 +147,10 @@ public class view {
 	}
 	
 	private void viewMember(){
-		printMemberInfo(theJollyPirate.viewMember(1));
+		System.out.println("Please enter ID of member.");
+		int id = scan.nextInt();
+		
+		System.out.println(theJollyPirate.MemberList().get(id-1).toString());
 	}
 	
 	private void printMemberInfo(boatClub.Member m){
