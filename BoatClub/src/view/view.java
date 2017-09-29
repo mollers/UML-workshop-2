@@ -63,6 +63,7 @@ public class view {
 			
 			while(!checkInput(input)) {
 				System.err.println("Please enter a number displayed in the meny or q");
+				Thread.sleep(1);
 				System.out.print("Command: ");
 				input = scan.nextLine();
 			}
