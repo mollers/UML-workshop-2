@@ -172,7 +172,6 @@ public class view {
 	}
 
 	private void registerBoat(){
-		scan.nextLine();
 		System.out.println("Please enter member ID.");
 		int i = scan.nextInt();
 
@@ -187,7 +186,6 @@ public class view {
 	}
 
 	private void deleteBoat(){
-		scan.nextLine();
 		System.out.println("Please enter id of member.");
 		int id = scan.nextInt();
 

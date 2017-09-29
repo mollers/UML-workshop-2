@@ -1,13 +1,10 @@
 package model;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.json.*;
@@ -19,20 +16,24 @@ public class Registry {
 
 	public Registry() {
 		this.memberArr = new ArrayList<Member>();
-		this.file = new File("src/data/members.json");
+		this.file = new File(Registry.class.getResource("/data/members.json").getFile());
 	}
 
 	public ArrayList<Member> loadRegistry(){
-		BufferedReader bf;
 		try {
-			// read the file if it consists anything. 
-			bf = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-			String line;
-			if((line = bf.readLine()) !=  null) {
-				JSONArr = new JSONArray(line);
+			
+			InputStream stream = this.getClass().getClassLoader().getResourceAsStream("data/members.json");
+			int nextByte;
+			String JSONString = "";
+			while((nextByte = stream.read()) > -1) // Reads the whole file
+			{
+				JSONString += ((char)nextByte);
 			}
-			bf.close();
-
+			
+			//creates json array from string
+			if(JSONString.length() > 0) {
+				JSONArr = new JSONArray(JSONString);
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
