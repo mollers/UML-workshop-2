@@ -45,21 +45,21 @@ public class view {
 			switch (input){
 				case 0: addMember();
 					break;
-				case 1: 
+				case 1: compactList();
 					break;
 				case 2:	verboseList();
 					break;
 				case 3:	deleteMember();
 					break;
-				case 4:
+				case 4:	changeMemberInfo();
 					break;
 				case 5: viewMember();
 					break;
-				case 6:
+				case 6:	registerBoat();
 					break;
-				case 7:
+				case 7:	deleteBoat();
 					break;
-				case 8:
+				case 8:	changeBoatInfo();
 					break;
 				default: input = 'q';
 					break;
