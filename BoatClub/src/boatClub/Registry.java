@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.json.*;
 
@@ -25,9 +24,12 @@ public class Registry {
 		BufferedReader bf;
 		try {
 			bf = new BufferedReader(new FileReader(file.getPath()));
-			JSONArr = new JSONArray(bf.readLine());
+			String line;
+			if((line = bf.readLine()) !=  null) {
+				JSONArr = new JSONArray(line);
+			}
 			bf.close();
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +37,6 @@ public class Registry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(JSONArr.toString());
 		JSONObject jsObj;
 		JSONArray jsBoats;
 		for(int i = 0; i < JSONArr.length(); i++) {
@@ -49,14 +50,14 @@ public class Registry {
 			}
 			memberArr.add(temp);
 		}
-		
+
 		return memberArr;
 	}
 	public void addMember(Member member) {
 		long start = System.currentTimeMillis();
 		JSONObject JSONMember = new JSONObject();
 		JSONArray JSONBoats = new JSONArray();
-		
+
 
 		JSONMember.put("name", member.getName());
 		JSONMember.put("persNR", member.getPersonalNR());
@@ -69,7 +70,7 @@ public class Registry {
 			JSONBoat.put("boatType", boatArr.get(i).getType());
 			JSONBoats.put(JSONBoat);
 		}
-		
+
 		JSONMember.put("boats", JSONBoats);
 		JSONArr.put(JSONMember);
 		FileWriter writer;
@@ -78,7 +79,7 @@ public class Registry {
 			writer.write(JSONArr.toString());
 			writer.flush();
 			writer.close();
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
