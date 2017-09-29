@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class view {
@@ -33,19 +34,19 @@ public class view {
 	
 	public int getInputChar(){
 		try {
+			input = scan.nextInt();
 			
-			
-			do {
+			while (input < 0){
 				System.err.println("Please enter a number displayed in the meny.");
 				input = scan.nextInt();
-			}while(input > 0);
+			}
 			
 			switch (input){
 				case 0: addMember();
 					break;
 				case 1: 
 					break;
-				case 2:	System.out.println("hello");
+				case 2:	verboseList();
 					break;
 				case 3:
 					break;
@@ -90,23 +91,55 @@ public class view {
 	
 	private void addMember(){
 		System.out.println("Please enter name of new member.");
-		String name = getInput();
+		//String name = getInput();
 		
 		System.out.println("Please enter personal number of new member in the following format yymmdd-xxxx");
-		String pn = getInput();
+		//String pn = getInput();
 		
-		theJollyPirate.addMemmber(name, pn);
+		theJollyPirate.addMemmber("Emil", "920718-1190");
+	}
+	
+	private void compactList(){
+		
+	}
+	
+	private void verboseList(){
+		ArrayList<boatClub.Member> boatClub = theJollyPirate.MemberList();
+		
+		for (boatClub.Member m: boatClub){
+			printMemberInfo(m);
+		}
+	}
+	
+	private void deleteMember(){
+		
 	}
 	
 	private String getInput(){
-		return scan.nextLine();
+		String s = "";
+		try {
+			s = scan.nextLine();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return s;
 	}
 	
 	private void getCompactList(){
 		theJollyPirate.MemberList();
+		
 	}
 	
 	private void viewMember(){
-		System.out.println(theJollyPirate.viewMember(0).toString());
+		printMemberInfo(theJollyPirate.viewMember(1));
+	}
+	
+	private void printMemberInfo(boatClub.Member m){
+		System.out.println("Name: " + m.getName() + " personalNr: " + m.getPersonalNR() + " ID: " + m.getId());
+		
+		for (int i = 0; i < m.getNumberOfBoats(); i++){
+			System.out.println("Boat " + (i + 1) + ": " + m.getBoats().get(i).toString());
+		}
 	}
 }

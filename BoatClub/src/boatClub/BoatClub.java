@@ -69,11 +69,14 @@ public class BoatClub {
 		
 	}
 	private int getNewId() {
-		int i = members.size();
-		if(0 < i) {
+		
+		if(!members.isEmpty()) {
+			int i = members.size();
 			return members.get(i-1).getId() + 1;
+		} else {
+			return 1;
 		}
-		return 1;
+		
 	}
 	private void uppdateRegistry() {
 		// delete exissting registry
