@@ -35,4 +35,8 @@ public class Boat {
 	public boatType getType(){
 		return this.type;
 	}
+	
+	public String toString(){
+		return "Type: " + this.type + " Length: " + this.length;
+	}
 }
