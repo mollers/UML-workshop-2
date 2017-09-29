@@ -1,5 +1,5 @@
 import boatClub.BoatClub;
-import view.Controller;
+
 import view.view;
 
 public class Program {
@@ -9,9 +9,11 @@ public class Program {
 		BoatClub b = new BoatClub();
 		b.init();
 		view v = new view(b);
-		Controller c = new Controller();
-		
-		c.useBoatClubSystem(b, v);
+		v.displayMenu();
+		while (v.usingSystem()){
+			
+			v.getInputChar();
+		}
 		
 	}
 }

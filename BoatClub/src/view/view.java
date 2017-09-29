@@ -104,13 +104,14 @@ public class view {
 	}
 	
 	private void compactList(){
-		
+		for (boatClub.Member m: theJollyPirate.MemberList()){
+			System.out.println(m.getCompactInfo());
+		}
 	}
 	
 	private void verboseList(){
-		
 		for (boatClub.Member m: theJollyPirate.MemberList()){
-			printMemberInfo(m);
+			System.out.println(m.toString());
 		}
 	}
 	
