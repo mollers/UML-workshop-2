@@ -171,14 +171,14 @@ public class view {
 	}
 
 	private void registerBoat(){
-		scan.nextLine();
+		
 		System.out.println("Please enter member ID.");
 		int i = scan.nextInt();
 
 		System.out.println("Please enter length of boat.");
 		int l = scan.nextInt();
 
-		scan.nextLine();
+		
 		System.out.println("Please enter boat type.");
 		model.Boat.boatType type = Boat.boatType.valueOf(scan.nextLine());
 
@@ -186,11 +186,11 @@ public class view {
 	}
 
 	private void deleteBoat(){
-		scan.nextLine();
+		
 		System.out.println("Please enter id of member.");
 		int id = scan.nextInt();
 
-		scan.nextLine();
+		
 		System.out.println("Please enter index of boat");
 		int i = scan.nextInt();
 
