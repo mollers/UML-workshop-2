@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class view {
 	
-	Scanner scan = new Scanner(System.in);
+	final Scanner scan = new Scanner(System.in);
 	private int input;
 	private boatClub.BoatClub theJollyPirate;
 	
@@ -49,7 +49,7 @@ public class view {
 					break;
 				case 2:	verboseList();
 					break;
-				case 3:
+				case 3:	deleteMember();
 					break;
 				case 4:
 					break;
@@ -91,6 +91,7 @@ public class view {
 	}
 	
 	private void addMember(){
+		scan.nextLine();
 		System.out.println("Please enter name of new member.");
 		String name = getInput();
 		
@@ -113,6 +114,12 @@ public class view {
 	}
 	
 	private void deleteMember(){
+		System.out.println("Please enter ID of the member you want to delete.");
+		int i = scan.nextInt();
+		theJollyPirate.deleteMember(i);
+	}
+	
+	private void changeMemberInfo(){
 		
 	}
 	
@@ -120,7 +127,6 @@ public class view {
 		
 		String s = "";
 		try {
-			
 			
 			while (scan.hasNextLine()){
 				s = scan.nextLine();
@@ -148,5 +154,17 @@ public class view {
 		for (int i = 0; i < m.getNumberOfBoats(); i++){
 			System.out.println("Boat " + (i + 1) + ": " + m.getBoats().get(i).toString());
 		}
+	}
+	
+	private void registerBoat(){
+		
+	}
+	
+	private void deleteBoat(){
+		
+	}
+	
+	private void changeBoatInfo(){
+		
 	}
 }
