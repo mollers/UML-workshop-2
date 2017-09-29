@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class view {
+	
 	Scanner scan = new Scanner(System.in);
 	private int input;
 	private boatClub.BoatClub theJollyPirate;
@@ -91,12 +92,12 @@ public class view {
 	
 	private void addMember(){
 		System.out.println("Please enter name of new member.");
-		//String name = getInput();
+		String name = getInput();
 		
 		System.out.println("Please enter personal number of new member in the following format yymmdd-xxxx");
-		//String pn = getInput();
+		String pn = getInput();
 		
-		theJollyPirate.addMemmber("Emil", "920718-1190");
+		theJollyPirate.addMemmber(name, pn);
 	}
 	
 	private void compactList(){
@@ -116,9 +117,15 @@ public class view {
 	}
 	
 	private String getInput(){
+		
 		String s = "";
 		try {
-			s = scan.nextLine();
+			
+			
+			while (scan.hasNextLine()){
+				s = scan.nextLine();
+				if (s != "") break;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
