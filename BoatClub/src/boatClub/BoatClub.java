@@ -29,7 +29,8 @@ public class BoatClub {
 	public void deleteMember(int id){
 		int i = findMemberPos(id);
 		members.remove(i);
-		uppdateRegistry();
+		reg.changeMember(members);
+		//uppdateRegistry();
 	}
 	//returns the member with the given id
 	public Member viewMember(int id){
@@ -41,20 +42,23 @@ public class BoatClub {
 		int i = findMemberPos(id);
 		Member member = members.get(i);
 		member.addBoat(lenght, boatType);
-		uppdateRegistry();
+		reg.changeMember(members);
+		//uppdateRegistry();
 	}
 	//remove boat from the member
 	public void deleteBoat(int id, int index){
 		int i = findMemberPos(id);
 		members.get(i).deleteBoats(index);
-		uppdateRegistry();
+		reg.changeMember(members);
+		//uppdateRegistry();
 		
 	}
 	//change info of the exizting boat to new info given
 	public void changeBoaT(int id, int index, int size, Boat.boatType boatType){
 		int i = findMemberPos(id);
 		members.get(i).changeBoat(index, size, boatType);
-		uppdateRegistry();
+		reg.changeMember(members);
+		//uppdateRegistry();
 	}
 	//gives the position in the arraylist for the member with the given id
 	private int findMemberPos(int id) {
@@ -78,10 +82,11 @@ public class BoatClub {
 		}
 		return 1;
 	}
+	/*
 	private void uppdateRegistry() {
 		// delete exissting registry
 		for(int i = 0; i < members.size(); i++) {
 			reg.addMember(members.get(i));
 		}
-	}
+	}*/
 }

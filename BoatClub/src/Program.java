@@ -14,5 +14,4 @@ public class Program {
 		c.useBoatClubSystem(b, v);
 		
 	}
-
 }
