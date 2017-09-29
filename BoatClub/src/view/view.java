@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -193,7 +194,19 @@ public class view {
 		theJollyPirate.deleteBoat(id, i);
 	}
 	
-	private void changeBoatInfo(){
+	private void changeBoatInfo() throws IOException{
+		System.out.println("Please enter id of member.");
+		int id = Integer.parseInt(scan.nextLine());
 		
+		System.out.println("Please enter index of members boat.");
+		int index = Integer.parseInt(scan.nextLine());
+		
+		System.out.println("Please enter new length of members boat.");
+		int length = Integer.parseInt(scan.nextLine());
+		
+		System.out.println("Please enter boat type of boat.");
+		model.Boat.boatType t = Boat.boatType.valueOf(scan.nextLine());
+		
+		theJollyPirate.changeBoaT(id, index, length, t);
 	}
 }

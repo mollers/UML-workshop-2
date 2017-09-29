@@ -10,6 +10,7 @@ public class Program {
 		b.init();
 		view v = new view(b);
 		v.displayMenu();
+		
 		while (v.usingSystem()){
 			
 			v.getInputChar();
