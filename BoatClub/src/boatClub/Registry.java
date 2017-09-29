@@ -23,6 +23,7 @@ public class Registry {
 	public ArrayList<Member> loadRegistry(){
 		BufferedReader bf;
 		try {
+			// read the file if it consists anything. 
 			bf = new BufferedReader(new FileReader(file.getPath()));
 			String line;
 			if((line = bf.readLine()) !=  null) {
@@ -37,42 +38,28 @@ public class Registry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Parsing JSON to member.
 		JSONObject jsObj;
 		JSONArray jsBoats;
 		for(int i = 0; i < JSONArr.length(); i++) {
 			jsObj = JSONArr.getJSONObject(i);
-			Member temp = new Member(jsObj.getString("name"), 
+			Member loadMember = new Member(jsObj.getString("name"), 
 					jsObj.getString("persNR"),jsObj.getInt("id"));
 			jsBoats = jsObj.getJSONArray("boats");
 			for(int j = 0; j < jsBoats.length(); j++) {
-				temp.addBoat(jsBoats.getJSONObject(j).getInt("length")
+				loadMember.addBoat(jsBoats.getJSONObject(j).getInt("length")
 						, Boat.boatType.valueOf(jsBoats.getJSONObject(j).getString("boatType")));
 			}
-			memberArr.add(temp);
+			memberArr.add(loadMember);
 		}
 
 		return memberArr;
 	}
 	public void addMember(Member member) {
-		long start = System.currentTimeMillis();
-		JSONObject JSONMember = new JSONObject();
-		JSONArray JSONBoats = new JSONArray();
-
-
-		JSONMember.put("name", member.getName());
-		JSONMember.put("persNR", member.getPersonalNR());
-		JSONMember.put("id", member.getId());
-
-		ArrayList<Boat> boatArr = member.getBoats();
-		for(int i = 0; i < boatArr.size(); i++) {
-			JSONObject JSONBoat = new JSONObject();
-			JSONBoat.put("length", boatArr.get(i).getLength());
-			JSONBoat.put("boatType", boatArr.get(i).getType());
-			JSONBoats.put(JSONBoat);
-		}
-
-		JSONMember.put("boats", JSONBoats);
-		JSONArr.put(JSONMember);
+		JSONObject JSONMember = parseToJSONObject(member);
+		
+		JSONArr.put(JSONMember); // Add member to the JSON Array and overwrite the file with the new array.
 		FileWriter writer;
 		try {
 			writer = new FileWriter (file);
@@ -84,14 +71,45 @@ public class Registry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		long end = System.currentTimeMillis();
-		System.out.println("Adding member took: " + (end - start) + " ms");
 
 	}
 	public void changeMember(ArrayList<Member> members) {
-		JSONArr = new JSONArray();
-		for(Member m : members) {
-			addMember(m);
+		JSONArr = new JSONArray(); // Clear the JSON array list and add all members.
+		for(Member member : members) {
+			JSONArr.put(parseToJSONObject(member));
 		}
+		
+		//Write JSON array to file.
+		FileWriter writer;
+		try {
+			writer = new FileWriter (file);
+			writer.write(JSONArr.toString());
+			writer.flush();
+			writer.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	private JSONObject parseToJSONObject(Member member) {
+		JSONObject JSONMember = new JSONObject();
+		JSONArray JSONBoats = new JSONArray();
+		
+		//Parsing member to JSON 
+		JSONMember.put("name", member.getName());
+		JSONMember.put("persNR", member.getPersonalNR());
+		JSONMember.put("id", member.getId());
+		ArrayList<Boat> boatArr = member.getBoats();
+		for(int i = 0; i < boatArr.size(); i++) {
+			JSONObject JSONBoat = new JSONObject();
+			JSONBoat.put("length", boatArr.get(i).getLength());
+			JSONBoat.put("boatType", boatArr.get(i).getType());
+			JSONBoats.put(JSONBoat);
+		}
+		JSONMember.put("boats", JSONBoats);
+		
+		return JSONMember;
 	}
 }
