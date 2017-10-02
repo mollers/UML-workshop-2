@@ -53,7 +53,7 @@ public class Member {
 		this.boats.add(boat);
 	}
 	
-	public void deleteBoats(int index){
+	public void deleteBoat(int index){
 		this.boats.remove(index);
 	}
 	public void changeBoat(int index, int lenght, Boat.boatType boatType) {

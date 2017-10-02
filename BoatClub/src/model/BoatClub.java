@@ -64,7 +64,7 @@ public class BoatClub {
 	//remove boat from the member
 	public void deleteBoat(int id, int index){
 		int i = findMemberPos(id);
-		members.get(i).deleteBoats(index);
+		members.get(i).deleteBoat(index);
 		reg.changeMember(members);
 		//uppdateRegistry();
 
