@@ -370,6 +370,10 @@ public class view {
 					System.err.println("Input expected to be integer or \"b\"");
 					Thread.sleep(1);
 					nextCommand();
+				}else if(Integer.valueOf(boatLength) <= 0) {
+					System.err.println("The length have to be longer then 0");
+					Thread.sleep(1);
+					nextCommand();
 				} else {
 					System.out.println("Please enter boat type. 0 - > Sailboat, 1 -> Motorsailer, 2 -> Kayak_Canoe, 3 -> Other");
 					System.out.print("Type: ");
