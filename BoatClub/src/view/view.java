@@ -131,6 +131,7 @@ public class view {
 
 	private void compactList(){
 		int i = 0;
+		System.out.println("COMPACTLIST");
 		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println("Member " + (++i) + ": " + m.getCompactInfo());
 		}
@@ -138,6 +139,7 @@ public class view {
 	}
 
 	private void verboseList(){
+		System.out.println("VERBOSELIST");
 		for (model.Member m: theJollyPirate.MemberList()){
 			System.out.println("Member: " + m.toString());
 		}
