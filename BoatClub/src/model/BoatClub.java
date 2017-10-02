@@ -6,7 +6,7 @@ public class BoatClub {
 
 	private ArrayList<Member> members;
 	private Registry reg = new Registry();
-	
+
 	public void init(){
 		members = reg.loadRegistry();
 	}
@@ -17,27 +17,36 @@ public class BoatClub {
 		members.add(member);
 		reg.addMember(member);
 	}
-	
+
 	public ArrayList<Member> MemberList(){
 		return members;
 	}
-	
-	public void changeMemberInfo(int id, String name, String personalNR){
+
+	public boolean changeMemberInfo(int id, String name, String personalNR){
 		int i = findMemberPos(id);
-		members.get(i).setName(name);
-		members.get(i).setPersonalNR(personalNR);
-		reg.changeMember(members);
+		if(i == -1) {
+			return false;
+		}else {
+			members.get(i).setName(name);
+			members.get(i).setPersonalNR(personalNR);
+			reg.changeMember(members);
+			return true;
+		}
+
 	}
-	public void changeMemberInfo(String name){
-		
-	}
-	
+
 	//delete member with the given id
-	public void deleteMember(int id){
+	public boolean deleteMember(int id){
 		int i = findMemberPos(id);
-		members.remove(i);
-		reg.changeMember(members);
-		//uppdateRegistry();
+		if(i == -1) {
+			return false;
+		}
+		else {
+			members.remove(i);
+			reg.changeMember(members);
+			return true;
+		}
+
 	}
 	//returns the member with the given id
 	public Member viewMember(int id){
@@ -58,10 +67,10 @@ public class BoatClub {
 		members.get(i).deleteBoats(index);
 		reg.changeMember(members);
 		//uppdateRegistry();
-		
+
 	}
 	//change info of the existing boat to new info given
-	public void changeBoaT(int id, int index, int size, Boat.boatType boatType){
+	public void changeBoat(int id, int index, int size, Boat.boatType boatType){
 		int i = findMemberPos(id);
 		members.get(i).changeBoat(index, size, boatType);
 		reg.changeMember(members);
@@ -75,12 +84,27 @@ public class BoatClub {
 				return i;
 			}
 		}
-		
-		
-		return 0;
+		return -1;
+	}
+	public boolean memberExists(int id) {
+		boolean exists = (findMemberPos(id) == -1);
+		if(exists){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	public boolean boatExists(int memberID, int boatIndex) {
+		try {
+			this.members.get(findMemberPos(memberID)).getBoats().get(boatIndex);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
 		
 	}
-	
+
 	// checks the previous highest id of members and gives a new id that is not held
 	private int getNewId() {
 		int i = members.size();
