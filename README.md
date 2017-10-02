@@ -3,7 +3,7 @@
 #Starting the program
 The program have a console based user interface. To start the program either double click on the script "StartBoatClubConsole.bat" or write in your command prompt "java -jar BoatClubConsole.jar". To be able to start the program you will need to have Java virtual machine installed.
 
-#How to use the program
+#Instructions
 When the program is started a menu of commands is displayed. 
   0: Create new member
   1: Compact member list
