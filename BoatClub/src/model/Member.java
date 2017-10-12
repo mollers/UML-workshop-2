@@ -53,19 +53,19 @@ public class Member {
 		this.boats.add(boat);
 	}
 	
-	public void deleteBoats(int index){
-		this.boats.remove(index-1);
+	public void deleteBoat(int index){
+		this.boats.remove(index);
 	}
 	public void changeBoat(int index, int lenght, Boat.boatType boatType) {
 		Boat boat = new Boat(lenght, boatType);
-		this.boats.set(index-1, boat);
+		this.boats.set(index, boat);
 	}
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("Name: " + this.getName() + " Personal number: " + this.getPersonalNR() + " ID: " + this.getId() + "\n");
-		
-		for (model.Boat b: this.boats){
-			sb.append(b.toString());
+
+		for (int i = 0; i < this.boats.size(); i++) {
+			sb.append(this.boats.get(i).toString() + " ID: " + i + "\n");
 		}
 		return sb.toString();
 	}
