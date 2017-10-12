@@ -113,11 +113,4 @@ public class BoatClub {
 		}
 		return 1;
 	}
-	/*
-	private void uppdateRegistry() {
-		// delete exissting registry
-		for(int i = 0; i < members.size(); i++) {
-			reg.addMember(members.get(i));
-		}
-	}*/
 }
