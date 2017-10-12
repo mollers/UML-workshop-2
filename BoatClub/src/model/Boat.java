@@ -5,15 +5,8 @@ public class Boat {
 	private boatType type;
 	
 	public Boat(int i, boatType t){
-		if (i < 1){
-			// Maybe move this error handling to view?
-			System.err.println("A boat can't be shorter than 1");
-			//this.type = t;
-			
-		} else {
-			this.length = i;
-			this.type = t;
-		}
+		this.length = i;
+		this.type = t;
 	}
 	
 	public enum boatType{
@@ -37,6 +30,6 @@ public class Boat {
 	}
 	
 	public String toString(){
-		return "Boat: " + this.type + " Length: " + this.length + "\n";
+		return "Boat: " + this.type + " Length: " + this.length;
 	}
 }
