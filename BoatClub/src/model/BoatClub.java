@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import model.Member.BoatIterator;
+
 public class BoatClub {
 
 	private ArrayList<Member> members;
@@ -59,14 +61,12 @@ public class BoatClub {
 		Member member = members.get(i);
 		member.addBoat(lenght, boatType);
 		reg.changeMember(members);
-		//uppdateRegistry();
 	}
 	//remove boat from the member
 	public void deleteBoat(int id, int index){
 		int i = findMemberPos(id);
 		members.get(i).deleteBoat(index);
 		reg.changeMember(members);
-		//uppdateRegistry();
 
 	}
 	//change info of the existing boat to new info given
@@ -74,7 +74,6 @@ public class BoatClub {
 		int i = findMemberPos(id);
 		members.get(i).changeBoat(index, size, boatType);
 		reg.changeMember(members);
-		//uppdateRegistry();
 	}
 	//gives the position in the arraylist for the member with the given id
 	private int findMemberPos(int id) {
@@ -97,7 +96,8 @@ public class BoatClub {
 	}
 	public boolean boatExists(int memberID, int boatIndex) {
 		try {
-			this.members.get(findMemberPos(memberID)).getBoats().get(boatIndex);
+			BoatIterator boats = (BoatIterator) this.members.get(findMemberPos(memberID)).iterator();
+			boats.get(boatIndex);
 			return true;
 		}catch (Exception e) {
 			return false;
@@ -113,11 +113,5 @@ public class BoatClub {
 		}
 		return 1;
 	}
-	/*
-	private void uppdateRegistry() {
-		// delete exissting registry
-		for(int i = 0; i < members.size(); i++) {
-			reg.addMember(members.get(i));
-		}
-	}*/
+
 }

@@ -1,7 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-public class Member {
+import java.util.Iterator;
+public class Member implements Iterable<Boat>{
 	private String name;
 	private String personalNR;
 	private final int id;
@@ -44,10 +45,6 @@ public class Member {
 		return this.boats.size();
 	}
 	
-	public ArrayList<Boat> getBoats() {
-		return boats;
-	}
-	
 	public void addBoat(int lenght, Boat.boatType boatType) {
 		Boat boat = new Boat(lenght, boatType);
 		this.boats.add(boat);
@@ -74,4 +71,35 @@ public class Member {
 		sb.append("Name: " + this.getName() + " ID: " + this.getId() + " Boats: " + this.getNumberOfBoats());
 		return sb.toString();
 	}
+
+	@Override
+	public Iterator<Boat> iterator() {
+		return new BoatIterator(this.boats);
+	}
+	public class BoatIterator implements Iterator<Boat> {
+		
+		private final ArrayList<Boat> boats;
+		private final int size;
+		private int index = 0;
+		
+		public BoatIterator(ArrayList<Boat> boats) {
+			this.boats = boats;
+			this.size = boats.size();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return index < size;
+		}
+
+		@Override
+		public Boat next() {
+			return boats.get(index++);
+		}
+		public Boat get(int index) {
+			return boats.get(index);
+		}
+		
+	}
+
 }

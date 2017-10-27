@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.*;
 
@@ -109,13 +110,17 @@ public class Registry {
 		JSONMember.put("name", member.getName());
 		JSONMember.put("persNR", member.getPersonalNR());
 		JSONMember.put("id", member.getId());
-		ArrayList<Boat> boatArr = member.getBoats();
-		for(int i = 0; i < boatArr.size(); i++) {
+		
+		Iterator<Boat> itr = member.iterator();
+		
+		while(itr.hasNext()) {
+			Boat nextBoat = itr.next();
 			JSONObject JSONBoat = new JSONObject();
-			JSONBoat.put("length", boatArr.get(i).getLength());
-			JSONBoat.put("boatType", boatArr.get(i).getType());
+			JSONBoat.put("length", nextBoat.getLength());
+			JSONBoat.put("boatType", nextBoat.getType());
 			JSONBoats.put(JSONBoat);
 		}
+		
 		JSONMember.put("boats", JSONBoats);
 		
 		return JSONMember;
