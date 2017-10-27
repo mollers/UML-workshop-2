@@ -113,8 +113,4 @@ public class BoatClub {
 		}
 		return 1;
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> 14c46aa32f8e7dff24521fe2638cfdda0d3601b5
 }
