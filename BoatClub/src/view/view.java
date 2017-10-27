@@ -1,9 +1,10 @@
 package view;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Boat;
+import model.Member;
 
 public class view {
 
@@ -34,10 +35,18 @@ public class view {
 				);
 		System.out.print("Command: ");
 	}
-
+	/**
+	 * A function to determine if the program should continue to run.
+	 * @return boolean, true if input is not q, false otherwise
+	 */
 	public boolean usingSystem(){
 		return input.compareTo("q") != 0;
 	}
+	/**
+	 *  This function checks the input when command is to be chosen.
+	 * @param input, the input that should be checked.
+	 * @return boolean, true if input is menu option or q (quit)
+	 */
 	private boolean checkInput(String input) {
 		if(input.length() <= 0)
 		{
@@ -58,8 +67,10 @@ public class view {
 		}
 		return true;
 	}
-
-	public String getInputChar(){
+/**
+ * This function waits for the next command input, and determine which command that should be executed. I
+ */
+	public void getInputChar(){
 		try {
 			input = scan.nextLine();
 
@@ -92,18 +103,20 @@ public class view {
 			break;
 			case "9": displayMenu();
 			break;
-			case "q": return "q";
+			case "q": System.out.println("Program has been shut down");;
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return input;
 	}
 	private void nextCommand() {
 		System.out.println("......................");
 		System.out.print("Next command: ");
 	}
+	/**
+	* Takes two inputs, checks if they are in the scope of what's accepted, and if they are, the member are added.
+	*/
 	private void addMember(){
 		System.out.println("ADD MEMBER - or insert b to go back to menu");
 		System.out.println("Enter name of new member and press enter or b to go back to menu");
@@ -127,24 +140,37 @@ public class view {
 			}		
 		}		
 	}
-
+/**
+ * Gets all members from boatClub and print a compact representation of them.
+ */
 	private void compactList(){
 		int i = 0;
 		System.out.println("COMPACTLIST");
 		for (model.Member m: theJollyPirate.MemberList()){
-			System.out.println("Member " + (++i) + ": " + m.getCompactInfo());
+			System.out.println("Member " + (++i) + ": " + "Name: " + m.getName() + " ID: " + m.getId() + " Boats: " + m.getNumberOfBoats());
 		}
 		nextCommand();
 	}
-
+/**
+ *  Gets all members from boatClub and print a verbose representation of them.
+ */
 	private void verboseList(){
 		System.out.println("VERBOSELIST");
 		for (model.Member m: theJollyPirate.MemberList()){
-			System.out.println("Member: " + m.toString());
+			StringBuffer sb = new StringBuffer();
+			sb.append("Name: " + m.getName() + " Personal number: " + m.getPersonalNR() + " ID: " + m.getId() + "\n");
+			ArrayList<Boat> boats = m.getBoats();
+			for (int i = 0; i < boats.size(); i++) {
+				sb.append("Boat: " + boats.get(i).getType() + " Length: " + boats.get(i).getLength() + " ID: " + i + "\n");
+			}
+			System.out.println("Member: " + sb.toString());
 		}
 		nextCommand();
 	}
-
+/**
+ *  Deletes the member that corresponds to the input value, if invalid id is entered, you get to the command choosing phase again.
+ * @throws InterruptedException, if any thread has interrupted the current thread. The interrupted status of the current thread is cleared when this exception is thrown.
+ */
 	private void deleteMember() throws InterruptedException{
 		System.out.println("DELETE MEMBER - or insert b to go back to menu");
 		System.out.println("Please enter ID of the member you want to delete");
@@ -169,7 +195,10 @@ public class view {
 		}
 
 	}
-
+/**
+ * Takes inputs, check if the inputs are valid, and change the member information corresponding to the inputs.
+ * @throws InterruptedException, if any thread has interrupted the current thread. The interrupted status of the current thread is cleared when this exception is thrown.
+ */
 	private void changeMemberInfo() throws InterruptedException{
 		System.out.println("CHANGE MEMBER INFO - or insert b to go back to menu");
 		System.out.println("Please enter id of member.");
@@ -205,6 +234,9 @@ public class view {
 			}
 		}
 	}
+	/**
+	* Checks for id input, if input is a valid member ID, the member is printed to the console.
+	*/
 	private void viewMember() throws InterruptedException{
 		System.out.println("VIEW MEMBER - or insert b to go back to menu.");
 		System.out.println("Please enter ID of member.");
@@ -218,7 +250,14 @@ public class view {
 			nextCommand();
 		}else {
 			try {
-				System.out.println(theJollyPirate.viewMember(Integer.valueOf(id)).toString());
+				Member m = theJollyPirate.viewMember(Integer.valueOf(id));
+				StringBuffer sb = new StringBuffer();
+				sb.append("Name: " + m.getName() + " Personal number: " + m.getPersonalNR() + " ID: " + m.getId() + "\n");
+				ArrayList<Boat> boats = m.getBoats();
+				for (int i = 0; i < boats.size(); i++) {
+					sb.append("Boat: " + boats.get(i).getType() + " Length: " + boats.get(i).getLength() + " ID: " + i + "\n");
+				}
+				System.out.println("Member: " + sb.toString());
 				nextCommand();
 			}
 			catch(Exception e) {
@@ -229,7 +268,10 @@ public class view {
 
 
 	}
-
+/**
+ *  Takes inputs, and register a new boat with type and length corresponding to inputs, to member corresponding to input. The inputs values are checked.
+ * @throws InterruptedException
+ */
 	private void registerBoat() throws InterruptedException{
 		System.out.println("REGISTER BOAT - or insert b to go back to menu.");
 		System.out.println("Please enter member ID.");
@@ -292,7 +334,10 @@ public class view {
 			}
 		}
 	}
-
+/**
+ * Deletes boat the corresponds to member id and boat id that's entered by user. The inputs are checked.
+ * @throws InterruptedException
+ */
 	private void deleteBoat() throws InterruptedException{
 		System.out.println("DELETE BOAT - or insert b to go back to menu.");
 		System.out.println("Please enter id of member.");
@@ -331,8 +376,11 @@ public class view {
 			}
 		}
 	}
-
-	private void changeBoatInfo() throws IOException, InterruptedException{
+ /**
+  * Change boat information to the boat the corresponds to the inputs, the inputs are checked and verified. 
+  * @throws InterruptedException
+  */
+	private void changeBoatInfo() throws InterruptedException{
 		System.out.println("CHANGE BOAT INFO - or insert b to go back to menu.");
 		System.out.println("Please enter id of member.");
 		System.out.print("Member ID: ");
@@ -406,7 +454,12 @@ public class view {
 				}
 			}
 		}
-	}
+	} 
+	/**
+	 * Checks if string can be parsed to a integer.
+	 * @param str, input string that will be changed if it's a integer.
+	 * @return boolean, true if @param str, can be parsed to a integer, otherwise false.
+	 */
 	private boolean isInteger(String str) {
 		try {
 			Integer.valueOf(str);

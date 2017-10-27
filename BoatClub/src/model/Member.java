@@ -57,6 +57,7 @@ public class Member implements Iterable<Boat>{
 		Boat boat = new Boat(lenght, boatType);
 		this.boats.set(index, boat);
 	}
+<<<<<<< HEAD
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("Name: " + this.getName() + " Personal number: " + this.getPersonalNR() + " ID: " + this.getId() + "\n");
@@ -102,4 +103,8 @@ public class Member implements Iterable<Boat>{
 		
 	}
 
+=======
+	
+	
+>>>>>>> 14c46aa32f8e7dff24521fe2638cfdda0d3601b5
 }
