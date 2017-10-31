@@ -82,12 +82,11 @@ public class Registry {
 		}
 
 	}
-	public void changeMember(ArrayList<Member> members) {
+	public void changeMember(Iterator<Member> members) {
 		JSONArr = new JSONArray(); // Clear the JSON array list and add all members.
-		for(Member member : members) {
-			JSONArr.put(parseToJSONObject(member));
+		while(members.hasNext()){
+			JSONArr.put(parseToJSONObject(members.next()));
 		}
-		
 		//Write JSON array to file.
 		FileWriter writer;
 		try {

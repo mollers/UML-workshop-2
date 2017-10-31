@@ -1,10 +1,11 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import model.Member.BoatIterator;
 
-public class BoatClub {
+public class BoatClub implements Iterable<Member> {
 
 	private ArrayList<Member> members;
 	private Registry reg = new Registry();
@@ -17,11 +18,8 @@ public class BoatClub {
 		int id = getNewId();
 		Member member = new Member(name, personalNR, id);
 		members.add(member);
-		reg.addMember(member);
-	}
-
-	public ArrayList<Member> MemberList(){
-		return members;
+		Member temp = member;
+		reg.addMember(temp);
 	}
 
 	public boolean changeMemberInfo(int id, String name, String personalNR){
@@ -31,10 +29,9 @@ public class BoatClub {
 		}else {
 			members.get(i).setName(name);
 			members.get(i).setPersonalNR(personalNR);
-			reg.changeMember(members);
+			reg.changeMember(new MemberIterator(this.members));
 			return true;
 		}
-
 	}
 
 	//delete member with the given id
@@ -45,7 +42,7 @@ public class BoatClub {
 		}
 		else {
 			members.remove(i);
-			reg.changeMember(members);
+			reg.changeMember(new MemberIterator(this.members));
 			return true;
 		}
 
@@ -53,27 +50,28 @@ public class BoatClub {
 	//returns the member with the given id
 	public Member viewMember(int id){
 		int i = findMemberPos(id);
-		return members.get(i);
+		Member temp = members.get(i);
+		return temp;
 	}
 	//adds boat to the member
 	public void registerBoat(int id, int lenght, Boat.boatType boatType){
 		int i = findMemberPos(id);
 		Member member = members.get(i);
 		member.addBoat(lenght, boatType);
-		reg.changeMember(members);
+		reg.changeMember(new MemberIterator(this.members));
 	}
 	//remove boat from the member
 	public void deleteBoat(int id, int index){
 		int i = findMemberPos(id);
 		members.get(i).deleteBoat(index);
-		reg.changeMember(members);
+		reg.changeMember(new MemberIterator(this.members));
 
 	}
 	//change info of the existing boat to new info given
 	public void changeBoat(int id, int index, int size, Boat.boatType boatType){
 		int i = findMemberPos(id);
 		members.get(i).changeBoat(index, size, boatType);
-		reg.changeMember(members);
+		reg.changeMember(new MemberIterator(this.members));
 	}
 	//gives the position in the arraylist for the member with the given id
 	private int findMemberPos(int id) {
@@ -113,4 +111,29 @@ public class BoatClub {
 		}
 		return 1;
 	}
+	@Override
+	public Iterator<Member> iterator() {
+		return new MemberIterator(this.members);
+	}
+	
+	private class MemberIterator implements Iterator<Member> {
+		private final ArrayList<Member> members;
+		private final int size;
+		private int index = 0;
+		
+		public MemberIterator (ArrayList<Member> members) {
+			this.members = members;
+			this.size = members.size();
+		}
+		@Override
+		public boolean hasNext() {
+			return index < size;
+		}
+
+		@Override
+		public Member next() {
+			return members.get(index++);
+		}
+	}
+	
 }

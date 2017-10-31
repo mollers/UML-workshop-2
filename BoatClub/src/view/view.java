@@ -1,6 +1,6 @@
 package view;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import model.Boat;
@@ -146,8 +146,12 @@ public class view {
 	private void compactList(){
 		int i = 0;
 		System.out.println("COMPACTLIST");
-		for (model.Member m: theJollyPirate.MemberList()){
-			System.out.println("Member " + (++i) + ": " + "Name: " + m.getName() + " ID: " + m.getId() + " Boats: " + m.getNumberOfBoats());
+		
+		Iterator<Member> itr = theJollyPirate.iterator();
+		while(itr.hasNext()) {
+			Member next = itr.next();
+			System.out.println("Member " + (++i) + ": " + "Name: " + next.getName() + " ID: " + next.getId() + " Boats: " + next.getNumberOfBoats());
+			
 		}
 		nextCommand();
 	}
@@ -156,12 +160,17 @@ public class view {
  */
 	private void verboseList(){
 		System.out.println("VERBOSELIST");
-		for (model.Member m: theJollyPirate.MemberList()){
+		Iterator<Member> itrMember = theJollyPirate.iterator();
+		while (itrMember.hasNext()){
 			StringBuffer sb = new StringBuffer();
-			sb.append("Name: " + m.getName() + " Personal number: " + m.getPersonalNR() + " ID: " + m.getId() + "\n");
-			ArrayList<Boat> boats = m.getBoats();
-			for (int i = 0; i < boats.size(); i++) {
-				sb.append("Boat: " + boats.get(i).getType() + " Length: " + boats.get(i).getLength() + " ID: " + i + "\n");
+			Member nextMember = itrMember.next();
+			sb.append("Name: " + nextMember.getName() + " Personal number: " + nextMember.getPersonalNR() + " ID: " + nextMember.getId() + "\n");
+			
+			Iterator<Boat> itrBoat = nextMember.iterator();
+			int counter = 0;
+			while( itrBoat.hasNext()) {
+				Boat nextBoat = itrBoat.next();
+				sb.append("Boat: " + nextBoat.getType() + " Length: " + nextBoat.getLength() + " ID: " + counter++ + "\n");
 			}
 			System.out.println("Member: " + sb.toString());
 		}
@@ -253,9 +262,11 @@ public class view {
 				Member m = theJollyPirate.viewMember(Integer.valueOf(id));
 				StringBuffer sb = new StringBuffer();
 				sb.append("Name: " + m.getName() + " Personal number: " + m.getPersonalNR() + " ID: " + m.getId() + "\n");
-				ArrayList<Boat> boats = m.getBoats();
-				for (int i = 0; i < boats.size(); i++) {
-					sb.append("Boat: " + boats.get(i).getType() + " Length: " + boats.get(i).getLength() + " ID: " + i + "\n");
+				Iterator<Boat> itr = m.iterator();
+				int counter = 0;
+				while( itr.hasNext()) {
+					Boat next = itr.next();
+					sb.append("Boat: " + next.getType() + " Length: " + next.getLength() + " ID: " + counter++ + "\n");
 				}
 				System.out.println("Member: " + sb.toString());
 				nextCommand();
