@@ -18,8 +18,8 @@ public class BoatClub implements Iterable<Member> {
 		int id = getNewId();
 		Member member = new Member(name, personalNR, id);
 		members.add(member);
-		Member temp = member;
-		reg.addMember(temp);
+		Member memberCopy = member;
+		reg.addMember(memberCopy);
 	}
 
 	public boolean changeMemberInfo(int id, String name, String personalNR){
